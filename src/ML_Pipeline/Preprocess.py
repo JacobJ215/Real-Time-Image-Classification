@@ -11,7 +11,7 @@ def cache_data(train_ds, val_ds):
     AUTOTUNE = tf.data.AUTOTUNE
 
     train_ds = train_ds.cache().shuffle(1000).prefetch(buffer_size=AUTOTUNE)
-    val_ds = val_ds.cache().prefect(buffer_size=AUTOTUNE)
+    val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
     return train_ds, val_ds
 
 
@@ -33,17 +33,17 @@ def create_dataset(data_dir):
     val_ds = tf.keras.utils.image_dataset_from_directory(
         data_dir, 
         validation_split=0.2,
-        subset="validatoin",
+        subset="validation",
         seed=42,
         image_size=(img_height, img_height),
         batch_size=batch_size
     )
 
-    class_names = train_ds.clas_names
+    class_names = train_ds.class_names
     print(f"Class Names: {class_names}")
     print("Data loading has completed...")
 
     train_ds, val_ds = cache_data(train_ds, val_ds)
 
     print("Preprocessing is complete...")
-    return train_ds, val_ds
+    return train_ds, val_ds, class_names

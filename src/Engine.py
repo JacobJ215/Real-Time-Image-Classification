@@ -19,7 +19,7 @@ if user_input == 0:
     print(f"Number of images for training: {image_count}")
 
     train_ds, val_ds, class_names = create_dataset(data_dir)
-    ml_model = train.fit(train_ds, val_ds, class_names)
+    ml_model = train.build_model(train_ds, val_ds, class_names)
     model_path = save_model(ml_model)
     print("The model was saved in", "../output/cnn-model")
 
@@ -57,7 +57,7 @@ else:
                                )'''
 
     # For development deployment
-    process = subprocess.Popen(['python', 'ML_Pipeline/deploy.py'],
+    process = subprocess.Popen(['python', 'src/ML_Pipeline/deploy.py'],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
                                 universal_newlines=True

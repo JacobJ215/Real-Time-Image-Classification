@@ -7,7 +7,7 @@ import tensorflow as tf
 # Create function to train the model
 def train(model, train_ds, val_ds):
     epochs = 30
-    model.fit(train_ds, validation_dat=val_ds, epochs=epochs)
+    model.fit(train_ds, validation_data=val_ds, epochs=epochs)
     return model
     
 
@@ -35,7 +35,6 @@ def build_model(train_ds, val_ds, class_names):
         layers.MaxPooling2D(),
         layers.Conv2D(16, 3, padding="same", activation="relu"),
         layers.MaxPooling2D(),
-        layers.Dropout(),
         layers.Flatten(),
         layers.Dense(128, activation="relu"),
         layers.Dense(num_classes)
@@ -43,7 +42,7 @@ def build_model(train_ds, val_ds, class_names):
 
 
     # Compile the model
-    model.compile(optimizwer="adma",
+    model.compile(optimizer="adam",
                 loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
                 metrics=["accuracy"])
     

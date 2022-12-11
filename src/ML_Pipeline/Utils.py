@@ -8,7 +8,7 @@ img_width = 180
 
 # Create function to save model
 def save_model(model):
-    model.save("../output/cnn_model.h5")
+    model.save("../output/cnn-model.h5")
 
     return True
 
